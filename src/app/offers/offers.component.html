@@ -1,0 +1,25 @@
+<div *ngIf="animalsService.isFetched &&
+            servicesService.isFetched &&
+            offersService.isFetched; else loading">
+  <app-offers-animals-list class="block"
+                           [animals]="animals"
+                           [selectedID]="selectedAnimalID"
+                           (onSelect)="selectAnimalByID($event)">
+  </app-offers-animals-list>
+  <app-offers-services-list class="block"
+                            [services]="selectedAnimalServices"
+                            (onToggle)="toggleService($event)"
+                            *ngIf="isAnimalSelected; else selectAnimal">
+  </app-offers-services-list>
+</div>
+
+<ng-template #loading>
+  Loading ...
+</ng-template>
+
+
+<ng-template #selectAnimal>
+  <p class="block message">
+    Select animal for toggling services
+  </p>
+</ng-template>

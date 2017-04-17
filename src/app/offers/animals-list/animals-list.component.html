@@ -1,0 +1,7 @@
+<div class="animals-list">
+  <app-offers-search (query)="query = $event"></app-offers-search>
+  <app-offers-selectable-list [items]="visibleAnimals"
+                              [selectedID]="selectedID"
+                              (onSelect)="select($event)">
+  </app-offers-selectable-list>
+</div>

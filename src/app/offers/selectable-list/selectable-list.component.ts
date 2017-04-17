@@ -1,38 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { SelectableItem } from '../shared/selectable-item.model';
 
 @Component({
   selector: 'app-offers-selectable-list',
   templateUrl: './selectable-list.component.html',
   styleUrls: ['./selectable-list.component.css']
 })
-export class SelectableListComponent implements OnInit {
+export class SelectableListComponent {
   @Input()
-  public items;
+  public items: SelectableItem[];
 
   @Input()
-  public query = '';
+  public selectedID: number;
 
   @Output()
   public onSelect = new EventEmitter<number>();
 
-  public activeID: number;
-
-  private isItemVisible(item) {
-    return item.name.indexOf(this.query) !== -1;
+  public select(item: SelectableItem) {
+    this.onSelect.emit(item.id);
   }
 
-  public get visibleItems() {
-    return this.items.filter(item => this.isItemVisible(item));
+  public isSelected(item): boolean {
+    return item.id === this.selectedID;
   }
-
-  public setActive(item) {
-    this.activeID = item.id;
-    this.onSelect.emit(this.activeID);
-  }
-
-  public isActive(item): boolean {
-    return item.id === this.activeID;
-  }
-
-  ngOnInit() { }
 }

@@ -1,7 +1,7 @@
 <ul>
-  <li *ngFor="let item of visibleItems"
-      (click)="setActive(item)"
-      [ngClass]="{'active': isActive(item)}">
+  <li *ngFor="let item of items"
+      (click)="select(item)"
+      [ngClass]="{'active': isSelected(item)}">
     {{item.name}}
   </li>
 </ul>

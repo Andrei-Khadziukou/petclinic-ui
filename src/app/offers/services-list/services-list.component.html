@@ -1,0 +1,6 @@
+<div class="services-list">
+  <app-offers-search (query)="query = $event"></app-offers-search>
+  <app-offers-toggleable-list [items]="visibleServices"
+                              (onToggle)="toggle($event)">
+  </app-offers-toggleable-list>
+</div>

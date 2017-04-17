@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { SearchComponent } from './search/search.component';
 import { SelectableListComponent } from './selectable-list/selectable-list.component';
+import { AnimalsListComponent } from './animals-list/animals-list.component';
+import { ToggleableListComponent } from './toggleable-list/toggleable-list.component';
+import { ServicesListComponent } from './services-list/services-list.component';
+import { OffersComponent } from './offers.component';
+import { SearchService } from './shared/search.service';
 
 @NgModule({
   imports: [
@@ -11,12 +16,18 @@ import { SelectableListComponent } from './selectable-list/selectable-list.compo
     FormsModule
   ],
   exports: [
-    SearchComponent,
-    SelectableListComponent
+    OffersComponent
   ],
   declarations: [
     SearchComponent,
-    SelectableListComponent
+    SelectableListComponent,
+    AnimalsListComponent,
+    ToggleableListComponent,
+    ServicesListComponent,
+    OffersComponent
+  ],
+  providers: [
+    SearchService
   ]
 })
 export class OffersModule { }

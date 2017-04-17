@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let item of items"
+      (click)="toggle(item)"
+      [ngClass]="{'active': item.isActive}">
+    {{item.name}}
+  </li>
+</ul>
