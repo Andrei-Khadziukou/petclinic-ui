@@ -1,1 +1,6 @@
-<app-offers-search></app-offers-search>
+<app-offers-search (query)="query = $event"></app-offers-search>
+<app-offers-selectable-list [items]="items"
+                            [query]="query"
+                            (onSelect)="activeID = $event">
+</app-offers-selectable-list>
+{{activeID}}

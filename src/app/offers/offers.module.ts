@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { SearchComponent } from './search/search.component';
+import { SelectableListComponent } from './selectable-list/selectable-list.component';
 
 @NgModule({
   imports: [
@@ -10,10 +11,12 @@ import { SearchComponent } from './search/search.component';
     FormsModule
   ],
   exports: [
-    SearchComponent
+    SearchComponent,
+    SelectableListComponent
   ],
   declarations: [
-    SearchComponent
+    SearchComponent,
+    SelectableListComponent
   ]
 })
 export class OffersModule { }
