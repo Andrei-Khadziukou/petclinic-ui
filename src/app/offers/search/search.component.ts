@@ -9,7 +9,7 @@ export class SearchComponent {
   @Output()
   public query = new EventEmitter<string>();
 
-  private setQuery(newQuery: string) {
+  public setQuery(newQuery: string) {
     this.query.emit(newQuery);
   }
 }
