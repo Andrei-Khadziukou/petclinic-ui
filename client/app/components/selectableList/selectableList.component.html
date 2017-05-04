@@ -1,0 +1,7 @@
+<ul class="selectable">
+  <li ng-repeat="item in $ctrl.items | filter:$ctrl.filter track by item.id"
+      ng-bind="item.name + (item.isDirty && '*')"
+      ng-class="{ active: item.id == $ctrl.selected }"
+      ng-click="$ctrl.onSelect({ id: item.id })">
+  </li>
+</ul>

@@ -1,0 +1,53 @@
+.clinics {
+  min-height: 100vh;
+  min-height: calc(100vh - 39px);
+  height: 100%;
+  background-color: #eee;
+  border-right: 1px solid #ccc;
+
+  input {
+    width: 100%;
+    border: 0;
+    background-color: #f5f5f5;
+    font-size: 1.2em;
+    padding: 15px;
+
+    &:hover, &:focus {
+      background-color: #f9f9f9;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ddd;
+    }
+
+    &.active {
+      background-color: #ccc;
+    }
+  }
+
+  button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    background-color: transparent;
+    border: 2px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+}

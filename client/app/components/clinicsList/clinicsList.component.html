@@ -1,0 +1,13 @@
+<div class="clinics">
+  <search title="'clinics'"
+          query="$ctrl.query">
+  </search>
+  <selectable-list items="$ctrl.items"
+                   filter="$ctrl.query"
+                   selected="$ctrl.selected"
+                   on-select="$ctrl.onSelect({ id })">
+  </selectable-list>
+  <button ng-click="$ctrl.onNew()">
+    Add new
+  </button>
+</div>

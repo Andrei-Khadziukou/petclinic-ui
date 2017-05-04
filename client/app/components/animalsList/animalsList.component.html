@@ -1,0 +1,10 @@
+<div class="panel">
+  <search title="'animals'"
+          query="$ctrl.query">
+  </search>
+  <selectable-list items="$ctrl.items"
+                   filter="$ctrl.query"
+                   selected="$ctrl.selected"
+                   on-select="$ctrl.onSelect({ id })">
+  </selectable-list>
+</div>
