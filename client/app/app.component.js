@@ -19,7 +19,8 @@ import {
   applySpec,
   fromPairs,
   juxt,
-  forEachObjIndexed
+  forEachObjIndexed,
+  sortBy
 } from "ramda";
 import { get, set } from "lodash";
 
@@ -73,7 +74,7 @@ const AppComponent = {
         .then(([clinics, animals, services]) => {
           this.isLoaded = true;
 
-          this.clinics = clinics;
+          this.clinics = sortBy(prop("name"), clinics);
           this.animals = animals;
           this.services = services;
 
@@ -92,7 +93,11 @@ const AppComponent = {
 
       forEachObjIndexed((clinic, id) => {
         if (id < 0) {
-          chain = chain.then(() => this.clinicsService.create(clinic));
+          if (!clinic.isDeleted) {
+            chain = chain.then(() => this.clinicsService.create(clinic));
+          }
+        } else if (clinic.isDeleted) {
+          chain = chain.then(() => this.clinicsService.delete(id));
         } else {
           chain = chain.then(() => this.clinicsService.update(clinic, id));
         }
@@ -110,6 +115,18 @@ const AppComponent = {
         name: `new clinic ${-id}`,
         address: ""
       });
+
+      this.selectClinic(id);
+    }
+
+    setDeleteStatusClinic(status, id) {
+      for (const clinic of this.clinics) {
+        if (clinic.id === id) {
+          clinic.isDeleted = status;
+          clinic.isDirty = true;
+          break;
+        }
+      }
     }
 
     get offersPath() {
@@ -200,7 +217,8 @@ const AppComponent = {
       const buildClinic = applySpec({
         name: prop("name"),
         address: prop("address"),
-        offers: buildOffers
+        offers: buildOffers,
+        isDeleted: prop("isDeleted")
       });
 
       const clinicsToSend = pipe(

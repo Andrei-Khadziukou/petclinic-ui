@@ -1,7 +1,18 @@
 <ul class="selectable">
   <li ng-repeat="item in $ctrl.items | filter:$ctrl.filter track by item.id"
-      ng-bind="item.name + (item.isDirty && '*')"
-      ng-class="{ active: item.id == $ctrl.selected }"
+      ng-class="{
+        active: item.id == $ctrl.selected,
+        dirty: item.isDirty,
+        deleted: item.isDeleted
+      }"
       ng-click="$ctrl.onSelect({ id: item.id })">
+    <span ng-bind="item.name"></span>
+    <span ng-if="item.isDirty">*</span>
+    <button class="delete-clinic"
+            ng-if="$ctrl.deletable"
+            ng-click="$ctrl.toggleDeletingStatus(item)">
+      <span ng-if="!item.isDeleted">&times;</span>
+      <span ng-if="item.isDeleted">&#9100;</span>
+    </button>
   </li>
 </ul>

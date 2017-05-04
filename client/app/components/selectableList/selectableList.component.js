@@ -7,8 +7,20 @@ let selectableListComponent = {
     filter: "<",
     items: "<",
     selected: "<",
-    onSelect: "&"
+    deletable: "<",
+    onSelect: "&",
+    onDelete: "&",
+    onRevert: "&"
   },
-  template
+  template,
+  controller: class {
+    toggleDeletingStatus(item) {
+      if (item.isDeleted) {
+        this.onRevert({ id: item.id });
+      } else {
+        this.onDelete({ id: item.id });
+      }
+    }
+  }
 };
 export default selectableListComponent;

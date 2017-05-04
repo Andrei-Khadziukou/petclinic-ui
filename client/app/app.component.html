@@ -12,6 +12,8 @@
                   items="$ctrl.clinics"
                   selected="$ctrl.selectedClinic"
                   on-select="$ctrl.selectClinic(id)"
+                  on-delete="$ctrl.setDeleteStatusClinic(true, id)"
+                  on-revert="$ctrl.setDeleteStatusClinic(false, id)"
                   on-new="$ctrl.addClinic()"></clinics-list>
 
     <form class="main">
@@ -52,23 +54,3 @@
     </form>
   </div>
 </div>
-
-<!--<div>
-      <form>
-        <label>
-        Name:
-        <input ng-model="$ctrl.clinicName">
-      </label>
-        <label>
-        Address:
-        <input ng-model="$ctrl.clinicAddress">
-      </label>
-        <label>
-        Offers:
-
-      </label>
-      </form>
-    </div>
-  </div>
-
-  -->

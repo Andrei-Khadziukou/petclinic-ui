@@ -7,6 +7,8 @@ let clinicsListComponent = {
     items: "<",
     selected: "<",
     onSelect: "&",
+    onDelete: "&",
+    onRevert: "&",
     onNew: "&"
   },
   template,

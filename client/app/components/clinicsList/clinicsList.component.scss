@@ -23,6 +23,7 @@
   }
 
   li {
+    position: relative;
     list-style: none;
     padding: 15px;
     border-top: 1px solid #ddd;
@@ -35,9 +36,13 @@
     &.active {
       background-color: #ccc;
     }
+
+    &.deleted {
+      text-decoration: line-through;
+    }
   }
 
-  button {
+  button.new-clinic {
     display: block;
     width: 80%;
     margin: 10px auto;
@@ -48,6 +53,22 @@
 
     &:hover {
       background-color: #ddd;
+    }
+  }
+
+  button.delete-clinic {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 0;
+    width: 48px;
+    height: 48px;
+    background: none;
+    font-size: 1.5em;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .1);
     }
   }
 }

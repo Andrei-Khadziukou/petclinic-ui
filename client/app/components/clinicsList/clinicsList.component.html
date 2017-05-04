@@ -5,9 +5,13 @@
   <selectable-list items="$ctrl.items"
                    filter="$ctrl.query"
                    selected="$ctrl.selected"
-                   on-select="$ctrl.onSelect({ id })">
+                   on-select="$ctrl.onSelect({ id })"
+                   on-delete="$ctrl.onDelete({ id })"
+                   on-revert="$ctrl.onRevert({ id })"
+                   deletable="true">
   </selectable-list>
-  <button ng-click="$ctrl.onNew()">
+  <button class="new-clinic"
+          ng-click="$ctrl.onNew()">
     Add new
   </button>
 </div>

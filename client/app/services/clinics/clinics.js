@@ -39,6 +39,16 @@ class clinicsService {
 
     return defer.promise;
   }
+
+  delete(id) {
+    const defer = this.$q.defer();
+    this.$http
+      .delete(`http://localhost:8082/clinics/${id}`)
+      .then(() => defer.resolve())
+      .catch(() => defer.reject());
+
+    return defer.promise;
+  }
 }
 
 export default clinicsService;
