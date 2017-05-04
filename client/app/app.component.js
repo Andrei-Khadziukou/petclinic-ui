@@ -20,7 +20,8 @@ import {
   fromPairs,
   juxt,
   forEachObjIndexed,
-  sortBy
+  sortBy,
+  reject
 } from "ramda";
 import { get, set } from "lodash";
 
@@ -58,11 +59,12 @@ const AppComponent = {
         servicesService
       });
 
+      this.isLoaded = false;
+
       this.fetch();
     }
 
     fetch() {
-      this.isLoaded = false;
       this.newClinicIndex = -1;
 
       this.$q
@@ -214,16 +216,24 @@ const AppComponent = {
         map(buildEntities)
       );
 
-      const buildClinic = applySpec({
-        name: prop("name"),
-        address: prop("address"),
-        offers: buildOffers,
-        isDeleted: prop("isDeleted")
-      });
+      const buildClinic = clinic => {
+        if (clinic.isDeleted) {
+          if (!(clinic.id < 0)) {
+            return { isDeleted: true };
+          }
+        } else {
+          return applySpec({
+            name: prop("name"),
+            address: prop("address"),
+            offers: buildOffers
+          })(clinic);
+        }
+      };
 
       const clinicsToSend = pipe(
         filter(prop("isDirty")),
-        mapIntoObj(prop("id"), buildClinic)
+        mapIntoObj(prop("id"), buildClinic),
+        reject(isNil)
       );
 
       return clinicsToSend(this.clinics);

@@ -1,4 +1,5 @@
-<ul class="selectable">
+<ul class="selectable"
+    ng-class="{ markable: $ctrl.markable }">
   <li ng-repeat="item in $ctrl.items | filter:$ctrl.filter track by item.id"
       ng-class="{
         active: item.id == $ctrl.selected,
@@ -14,5 +15,6 @@
       <span ng-if="!item.isDeleted">&times;</span>
       <span ng-if="item.isDeleted">&#9100;</span>
     </button>
+    <span class="mark">&#187;</span>
   </li>
 </ul>

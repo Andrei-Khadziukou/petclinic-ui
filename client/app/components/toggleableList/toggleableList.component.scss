@@ -1,0 +1,15 @@
+.toggleable {
+  li {
+    position: relative;
+
+    .checkmark {
+      display: none;
+      position: absolute;
+      right: 10px;
+    }
+
+    &.active .checkmark {
+      display: initial;
+    }
+  }
+}

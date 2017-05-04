@@ -8,6 +8,7 @@ let selectableListComponent = {
     items: "<",
     selected: "<",
     deletable: "<",
+    markable: "<",
     onSelect: "&",
     onDelete: "&",
     onRevert: "&"

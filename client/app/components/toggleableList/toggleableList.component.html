@@ -1,7 +1,8 @@
-<ul>
+<ul class="toggleable">
   <li ng-repeat="item in $ctrl.items | filter:$ctrl.filter track by item.id"
-      ng-bind="item.name"
       ng-class="{ active: item.isActive }"
       ng-click="$ctrl.onToggle({ id: item.id })">
+    <span ng-bind="item.name"></span>
+    <span class="checkmark">&#10004;</span>
   </li>
 </ul>
