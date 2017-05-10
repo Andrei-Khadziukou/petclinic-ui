@@ -1,0 +1,57 @@
+<div ng-if="$ctrl.isLoaded">
+  <div class="tools">
+    <button ng-click="$ctrl.save()">
+      Save
+    </button>
+    <button ng-click="$ctrl.reset()">
+      Reset
+    </button>
+  </div>
+  <div class="layout">
+    <clinics-list class="sidebar"
+                  items="$ctrl.clinics"
+                  selected="$ctrl.selectedClinic"
+                  on-select="$ctrl.selectClinic(id)"
+                  on-delete="$ctrl.setDeleteStatusClinic(true, id)"
+                  on-revert="$ctrl.setDeleteStatusClinic(false, id)"
+                  on-new="$ctrl.addClinic()"></clinics-list>
+
+    <form class="main"
+          ng-if="$ctrl.clinic">
+      <h1 ng-class="{ dirty: $ctrl.clinic.isDirty }">
+        <span ng-bind="$ctrl.clinicName"></span>
+        <span ng-if="$ctrl.clinic.isDirty">*</span>
+      </h1>
+      <label for="name">
+        Name:
+      </label>
+      <input id="name"
+             type="text"
+             ng-model="$ctrl.clinicName">
+      <label for="address">
+        Address:
+      </label>
+      <input id="address"
+             type="text"
+             ng-model="$ctrl.clinicAddress">
+      <label>
+        Offers:
+      </label>
+      <div class="offers">
+        <animals-list class="animals"
+                      items="$ctrl.animals"
+                      selected="$ctrl.selectedAnimal"
+                      on-select="$ctrl.selectAnimal(id)"></animals-list>
+        <services-list items="$ctrl.services"
+                       on-toggle="$ctrl.toggleService(id)"></services-list>
+      </div>
+
+      <label>
+        JSON to send:
+      </label>
+      <code>
+        <pre ng-bind="$ctrl.clinicsToSend | json"></pre>
+      </code>
+    </form>
+  </div>
+</div>

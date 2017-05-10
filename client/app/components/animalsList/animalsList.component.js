@@ -1,18 +1,15 @@
 import template from "./animalsList.component.html";
 import "./animalsList.component.scss";
 
-let animalsListComponent = {
+export default {
   restrict: "E",
   bindings: {
     items: "<",
     selected: "<",
     onSelect: "&"
   },
-  template,
-  controller: class {
-    constructor() {
-      this.query = "";
-    }
-  }
+  scope: {
+    query: ""
+  },
+  template
 };
-export default animalsListComponent;

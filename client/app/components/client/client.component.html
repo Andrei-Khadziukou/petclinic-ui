@@ -1,0 +1,50 @@
+<ul>
+  <li ng-repeat="page in $ctrl.pageIndexes">
+    <button ng-bind="page"
+            ng-click="$ctrl.selectPage($index)"
+            ng-disabled="!$ctrl.isAvailable($index)">
+    </button>
+    <span ng-if="$ctrl.currentPage == $index">
+      &lt;
+    </span>
+  </li>
+</ul>
+
+<div ng-if="$ctrl.currentPage == $ctrl.Pages.animalsSelection">
+  <select ng-model="$ctrl.selectedAnimal"
+          ng-options="animal.id as animal.value; animal.name for animal in $ctrl.animals">
+  </select>
+</div>
+
+<div ng-if="$ctrl.currentPage == $ctrl.Pages.servicesSelection">
+  <select ng-model="$ctrl.selectedServices"
+          ng-options="service.id as service.value; service.name for service in $ctrl.services"
+          multiple>
+  </select>
+</div>
+
+<div ng-if="$ctrl.currentPage == $ctrl.Pages.enteringName">
+  <input ng-model="$ctrl.name">
+</div>
+
+<div>
+  <button ng-if="$ctrl.currentPage > $ctrl.Pages.animalsSelection"
+          ng-click="$ctrl.selectPage($ctrl.currentPage - 1)"
+          ng-disabled="!$ctrl.isAvailable($ctrl.currentPage - 1)">
+    prev
+  </button>
+  <button ng-if="$ctrl.currentPage < $ctrl.Pages.result"
+          ng-click="$ctrl.selectPage($ctrl.currentPage + 1)"
+          ng-disabled="!$ctrl.isAvailable($ctrl.currentPage + 1)">
+    next
+  </button>
+</div>
+
+<code>
+  <pre ng-bind="{
+    animal: $ctrl.selectedAnimal,
+    services: $ctrl.selectedServices,
+    name: $ctrl.name
+  } | json">
+  </pre>
+</code>
