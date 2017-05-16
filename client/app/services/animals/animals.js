@@ -20,6 +20,21 @@ class animalsService {
 
     return defer.promise;
   }
+
+  getServices(id) {
+    const defer = this.$q.defer();
+    this.$http
+      .get(`http://localhost:8082/animals/${id}/services`)
+      .then(response => {
+        const data = response.data;
+        defer.resolve(data);
+      })
+      .catch(response => {
+        defer.reject(response.statusText);
+      });
+
+    return defer.promise;
+  }
 }
 
 export default animalsService;

@@ -1,50 +1,84 @@
-<ul>
-  <li ng-repeat="page in $ctrl.pageIndexes">
-    <button ng-bind="page"
-            ng-click="$ctrl.selectPage($index)"
-            ng-disabled="!$ctrl.isAvailable($index)">
-    </button>
-    <span ng-if="$ctrl.currentPage == $index">
-      &lt;
-    </span>
-  </li>
-</ul>
+<div class="client--wrapper">
+  <div class="client">
+    <h1> PetClinic </h1>
 
-<div ng-if="$ctrl.currentPage == $ctrl.Pages.animalsSelection">
-  <select ng-model="$ctrl.selectedAnimal"
-          ng-options="animal.id as animal.value; animal.name for animal in $ctrl.animals">
-  </select>
+    <ul class="pages-list">
+      <li ng-repeat="page in $ctrl.pageIndexes"
+          ng-class="{
+            active:  $ctrl.currentPage == $index,
+            done:    $ctrl.currentPage > $index,
+            enabled: $ctrl.isAvailable($index),
+          }">
+        <button ng-bind="page"
+                ng-click="$ctrl.selectPage($index)"
+                ng-disabled="!$ctrl.isAvailable($index)">
+        </button>
+      </li>
+    </ul>
+
+    <div class="page-inner">
+      <div ng-if="$ctrl.currentPage == $ctrl.Pages.animalsSelection">
+        <span class="page-header"> Select your pet </span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla fuga dolorum, et aperiam aliquid illo cumque consectetur
+          distinctio modi voluptatum architecto dolore! Sit, quibusdam ut nam provident debitis suscipit eius!</p>
+        <select ng-model="$ctrl.selectedAnimal"
+                ng-options="animal.id as animal.value; animal.name for animal in $ctrl.animals">
+      </select>
+      </div>
+
+      <div ng-if="$ctrl.currentPage == $ctrl.Pages.servicesSelection">
+        <span class="page-header">
+          Select services for your
+          <span ng-bind="$ctrl.selectedAnimalName"></span>
+        </span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga dicta eaque deleniti molestiae a ab reiciendis fugiat
+          natus quo tempora, quam, odio repudiandae, unde facere placeat velit numquam quasi quaerat.</p>
+
+        <tags-input ng-model="$ctrl.selectedServices"
+                    display-property="name"
+                    key-property="id"
+                    add-from-autocomplete-only="true"
+                    placeholder="Select services"
+                    on-tag-added="$ctrl.fetchClinics()"
+                    on-tag-removed="$ctrl.fetchClinics()">
+          <auto-complete source="$ctrl.queryServices($query)"
+                         min-length=0
+                         load-on-empty=true
+                         load-on-focus=true
+                         load-on-down-arrow=true></auto-complete>
+        </tags-input>
+      </div>
+
+      <div ng-if="$ctrl.currentPage == $ctrl.Pages.enteringName">
+        <span class="page-header"> Enter your name </span>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore magni odio omnis temporibus veniam! Atque quia
+          officiis distinctio. Neque officia non consequuntur et ipsum vitae exercitationem dolorum nisi molestias! Temporibus.</p>
+        <input ng-model="$ctrl.name">
+      </div>
+
+      <div ng-if="$ctrl.currentPage == $ctrl.Pages.result">
+        <ul>
+          <li ng-repeat="clinic in $ctrl.clinics"
+              ng-bind="clinic.name">
+          </li>
+        </ul>
+      </div>
+
+      <div class="page-controls">
+        <button class="prev-page"
+                ng-if="$ctrl.currentPage > $ctrl.Pages.animalsSelection"
+                ng-click="$ctrl.selectPage($ctrl.currentPage - 1)"
+                ng-disabled="!$ctrl.isAvailable($ctrl.currentPage - 1)">
+          prev
+        </button>
+        <div class="spacing"></div>
+        <button class="next-page"
+                ng-if="$ctrl.currentPage < $ctrl.Pages.result"
+                ng-click="$ctrl.selectPage($ctrl.currentPage + 1)"
+                ng-disabled="!$ctrl.isAvailable($ctrl.currentPage + 1)">
+          next
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div ng-if="$ctrl.currentPage == $ctrl.Pages.servicesSelection">
-  <select ng-model="$ctrl.selectedServices"
-          ng-options="service.id as service.value; service.name for service in $ctrl.services"
-          multiple>
-  </select>
-</div>
-
-<div ng-if="$ctrl.currentPage == $ctrl.Pages.enteringName">
-  <input ng-model="$ctrl.name">
-</div>
-
-<div>
-  <button ng-if="$ctrl.currentPage > $ctrl.Pages.animalsSelection"
-          ng-click="$ctrl.selectPage($ctrl.currentPage - 1)"
-          ng-disabled="!$ctrl.isAvailable($ctrl.currentPage - 1)">
-    prev
-  </button>
-  <button ng-if="$ctrl.currentPage < $ctrl.Pages.result"
-          ng-click="$ctrl.selectPage($ctrl.currentPage + 1)"
-          ng-disabled="!$ctrl.isAvailable($ctrl.currentPage + 1)">
-    next
-  </button>
-</div>
-
-<code>
-  <pre ng-bind="{
-    animal: $ctrl.selectedAnimal,
-    services: $ctrl.selectedServices,
-    name: $ctrl.name
-  } | json">
-  </pre>
-</code>

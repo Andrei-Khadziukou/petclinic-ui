@@ -1,5 +1,7 @@
 import "normalize.css";
 import angular from "angular";
+import "ng-tags-input";
+import "ng-tags-input/build/ng-tags-input.min.css";
 import UIRouter from "@uirouter/angularjs";
 import appComponent from "./app.component";
 import ComponentsModule from "./components/components";
@@ -16,8 +18,14 @@ const adminState = {
   url: "/admin",
   template: "<admin></admin>"
 };
+
 angular
-  .module("app", [ComponentsModule.name, ServicesModule.name, UIRouter])
+  .module("app", [
+    ComponentsModule.name,
+    ServicesModule.name,
+    UIRouter,
+    "ngTagsInput"
+  ])
   .config([
     "$stateProvider",
     $stateProvider => {

@@ -14,18 +14,19 @@ export default {
   template,
   controller: class {
     /* @ngInject */
-    constructor($q, animalsService, servicesService) {
+    constructor($q, animalsService, ordersService) {
       Object.assign(this, {
         Pages,
         pages: {
-          [Pages.animalsSelection]: "Select animal",
-          [Pages.servicesSelection]: "Select services",
-          [Pages.enteringName]: "Enter your name",
-          [Pages.result]: "View result"
+          [Pages.animalsSelection]: "Animal",
+          [Pages.servicesSelection]: "Services",
+          [Pages.enteringName]: "Name",
+          [Pages.result]: "Result"
         },
         currentPage: null,
         animals: null,
         services: null,
+        clinics: null,
         _selectedAnimal: null,
         selectedServices: [],
         name: ""
@@ -34,7 +35,7 @@ export default {
       Object.assign(this, {
         $q,
         animalsService,
-        servicesService
+        ordersService
       });
 
       this.fetchAnimals();
@@ -51,14 +52,26 @@ export default {
       return this._selectedAnimal;
     }
 
+    queryServices(query) {
+      query = query.toLowerCase();
+      return this.services.filter(
+        service => service.name.toLowerCase().indexOf(query) !== -1
+      );
+    }
+
     set selectedAnimal(animal) {
       this.selectedServices = [];
       this.services = null;
       this._selectedAnimal = animal;
 
-      this.servicesService.getData().then(services => {
-        this.services = services.slice(animal - 1);
+      this.animalsService.getServices(animal).then(services => {
+        this.services = services;
       });
+    }
+
+    get selectedAnimalName() {
+      return this.animals.find(animal => animal.id === this.selectedAnimal)
+        .name;
     }
 
     fetchAnimals() {
@@ -73,8 +86,15 @@ export default {
       this.currentPage = page;
     }
 
-    selectServices(services) {
-      this.selectedServices = services;
+    fetchClinics() {
+      this.clinics = null;
+
+      this.ordersService
+        .getData(
+          this.selectedAnimal,
+          this.selectedServices.map(service => service.id)
+        )
+        .then(clinics => (this.clinics = clinics));
     }
 
     isAvailable(page) {
@@ -93,7 +113,7 @@ export default {
           return this.selectedServices.length > 0;
 
         case Pages.result:
-          return this.name.trim().length > 0;
+          return this.name.trim().length > 0 && this.clinics != null;
 
         default:
           return false;
