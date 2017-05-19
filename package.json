@@ -56,8 +56,8 @@
     "yargs": "4.7.1"
   },
   "scripts": {
-    "start": "webpack && webpack-dev-server --content-base client/ --hot --inline --port 8090",
-    "serve": "webpack && webpack-dev-server --content-base client/ --hot --inline --port 8090",
+    "start": "webpack && webpack-dev-server --content-base src/client/ --hot --inline --port 8090",
+    "serve": "webpack && webpack-dev-server --content-base src/client/ --hot --inline --port 8090",
     "create Component": "gen comp",
     "build": "./node_modules/.bin/webpack -p --config ./webpack.config.js --progress",
     "startContainer": "npm run build && http-server ./build",

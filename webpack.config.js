@@ -1,7 +1,7 @@
 var path = require('path'),
     webpack = require("webpack"),
-    libPath = path.join(__dirname, 'client'),
-    wwwPath = path.join(__dirname, 'dist'),
+    libPath = path.join(__dirname, 'src/client'),
+    wwwPath = path.join(__dirname, 'build/dist'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -59,7 +59,7 @@ if (isDev) {
 }else{
   module.exports = {
     entry: path.join(libPath, '/app/app.module.js'),
-    context: path.resolve(__dirname, './client'),
+    context: path.resolve(__dirname, './src/client'),
     output: {
       filename: 'bundle.[hash].js',
       hashDigestLength: 7,
