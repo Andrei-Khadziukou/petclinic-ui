@@ -8,11 +8,12 @@ client/bundle.js
 client/bundle.js.map
 .ideadist
 .gradle
-gradle/**
+gradle
 gradlew
 gradlew.bat
 build
 **/build
+dist
 repo
 
 # IDEA Files
