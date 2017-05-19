@@ -59,7 +59,7 @@
     "start": "webpack && webpack-dev-server --content-base client/ --hot --inline --port 8090",
     "serve": "webpack && webpack-dev-server --content-base client/ --hot --inline --port 8090",
     "create Component": "gen comp",
-    "build": "webpack -p --config ./webpack.config.js --progress",
+    "build": "./node_modules/.bin/webpack -p --config ./webpack.config.js --progress",
     "startContainer": "npm run build && http-server ./build",
     "deploy": "node deploy.js"
   },

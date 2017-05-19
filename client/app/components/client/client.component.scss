@@ -2,9 +2,34 @@ h1 {
   margin: 0;
 }
 
+tags-input .tags {
+  box-shadow: none;
+  border-color: #eee;
+}
+
+tags-input .tags .tag-item {
+  background: #eee;
+  border-color: transparent;
+  border-radius: 0;
+
+  &.selected {
+    background: #f88;
+  }
+}
+
 .client {
   max-width: 800px;
   margin: 0 auto;
+
+  select {
+    background: none;
+    padding: 5px 10px 5px 5px;
+  }
+
+  input {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+  }
 
   &--wrapper {
     min-height: 100vh;
